@@ -2,15 +2,22 @@
   "name": "node-db2-challenge",
   "version": "1.0.0",
   "description": "Node DB 2 Module Challenge",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "server": "nodemon index.js"
+    "client-install": "cd client && npm install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \" npm run server \" \"npm run client\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Lambda School",
   "devDependencies": {
     "nodemon": "^1.19.2"
   },
   "dependencies": {
+    "concurrently": "^5.0.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "knex": "^0.20.1",
     "sqlite3": "^4.1.0"
