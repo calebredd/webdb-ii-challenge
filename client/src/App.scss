@@ -33,24 +33,27 @@
 
   .carList {
     display: flex;
-    align-items: stretch;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     width: 99vw;
 
     a {
       text-decoration: none;
       color: black;
-      width: 50%;
+      width: 30%;
+      display: flex;
+      align-items: stretch;
 
       .carCard {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         border: 2px solid black;
         background: lightblue;
-        margin: 20px;
+        margin: 20px auto;
         padding: 15px;
+        width: 90%;
 
         img {
           width: 50%;
@@ -67,18 +70,24 @@
     }
   }
 
-  .backButton {
+  .cardNav {
     width: 90%;
     margin: 10px auto;
     display: flex;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
 
-    span {
-      font-size: 1rem;
+    a {
+      text-decoration: none;
+      color: gray;
 
       &:hover {
-        color: gray;
+        color: lightblue;
       }
+    }
+
+    span {
+      font-size: 1.25rem;
     }
   }
 

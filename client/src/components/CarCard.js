@@ -14,16 +14,18 @@ export default function CarCard(props) {
       })
       .catch(err => console.error(err));
   }, [id]);
-  const goBack = () => {
-    props.history.goBack();
-  };
+  // const goBack = () => {
+  //   props.history.goBack();
+  // };
   // console.log(car);
   return (
     <>
-      <p className="backButton">
-        <span onClick={() => goBack()}>&#8592; Back to Cars</span>
+      <p className="cardNav">
+        <Link to={"/"}>
+          <span>&#8592; Back to Cars</span>
+        </Link>
         <Link to={`/updatecar/${id}`}>
-          <span>Update Car Listing</span>
+          <span>Update Car Listing &#8594;</span>
         </Link>
       </p>
       <div className="carView">
@@ -34,10 +36,10 @@ export default function CarCard(props) {
           </p>
           <img src={car.imgURL} alt={car.imgURL} />
           <p>Transmission: {car.transmissionType}</p>
-          <p>Odometer: {car.mileage}</p>
+          <p>Odometer: {car.mileage} miles</p>
           <p>Title: {car.title}</p>
-          <p>MRSP: {car.MSRP}</p>
-          <p>Location: {car.id}</p>
+          <p>MRSP: ${car.MSRP}</p>
+          <p>Location: Lot #{car.id}</p>
         </div>
       </div>
     </>

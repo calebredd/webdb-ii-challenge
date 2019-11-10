@@ -14,11 +14,11 @@ export default function CarList(props) {
                 {car.Year} {car.make} {car.model}
               </p>
               <img src={car.imgURL} alt={car.imgURL} />
-              <p>Transmission: {car.transmissionType}</p>
-              <p>Odometer: {car.mileage}</p>
-              <p>Title: {car.title}</p>
-              <p>MRSP: {car.MSRP}</p>
-              <p>Location: {car.id}</p>
+              {/* <p>Transmission: {car.transmissionType}</p> */}
+              <p>Odometer: {car.mileage} miles</p>
+              {/* <p>Title: {car.title}</p> */}
+              {/* <p>MRSP: {car.MSRP}</p> */}
+              {/* <p>Location: {car.id}</p> */}
             </div>
           </Link>
         ))}

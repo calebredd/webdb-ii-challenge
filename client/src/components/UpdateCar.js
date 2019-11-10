@@ -13,6 +13,16 @@ export default function UpdateCar(props) {
       })
       .catch(err => console.error(err));
   }, [id]);
+  const handleChangeMileage = e => {
+    setCar({ ...car, mileage: e.target.value });
+  };
+  const handleChangeMSRP = e => {
+    setCar({ ...car, MSRP: e.target.value });
+  };
+  const handleChangeImg = e => {
+    setCar({ ...car, imgURL: e.target.value });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -21,7 +31,6 @@ export default function UpdateCar(props) {
       transmissionType: e.target.transmissionType.value,
       title: e.target.title.value,
       msrp: e.target.msrp.value,
-      year: e.target.year.value,
       imgURL: e.target.imgURL.value
     };
     // console.log(vehicle);
@@ -29,33 +38,51 @@ export default function UpdateCar(props) {
       .put(`/api/cars/${id}`, vehicle)
       .then(res => {
         // console.log(res.data);
-        setCars(res.data);
-        props.history.push("/");
+        setCar(res.data);
+        axios
+          .get("/api/cars")
+          .then(res => {
+            // console.log(res.data.cars);
+            setCars(res.data.cars);
+            props.history.push(`/cars/${id}`);
+          })
+          .catch(err => console.error(err));
       })
       .catch(err => console.error(err));
   };
   const goBack = () => {
     props.history.goBack();
   };
-  console.log(car.imgURL);
+  // console.log(car);
   return (
     <div>
-      <p className="backButton">
-        <span onClick={() => goBack()}>&#8592; Cancel</span>
-      </p>
       <form onSubmit={e => handleSubmit(e)}>
         <p>Update Your Vehicle Information:</p>
-        <input type="number" name="year" placeholder={car.Year} />
+        <p>{car.Year + " " + car.make + " " + car.model}</p>
+        <label>Mileage:</label>
         <input
+          onChange={e => handleChangeMileage(e)}
           required
           type="number"
           name="mileage"
-          placeholder={car.mileage}
+          value={car.mileage}
+          placeholder="Mileage"
         />
-        <input required type="number" name="msrp" placeholder={car.MSRP} />
+        <lable>MSRP:</lable>
+        <input
+          required
+          type="number"
+          onChange={e => handleChangeMSRP(e)}
+          name="msrp"
+          value={car.MSRP}
+          placeholder="MSRP"
+        />
+        <label>Car Photo Link:</label>
         <input
           type="text"
           name="imgURL"
+          onChange={e => handleChangeImg(e)}
+          value={car.imgURL != null ? car.imgURL : undefined}
           placeholder={car.imgURL != null ? car.imgURL : "Add Photo Link"}
         />
         <label>Transmission:</label>
@@ -63,13 +90,13 @@ export default function UpdateCar(props) {
           <option value="">Select and Option</option>
           <option
             value="automatic"
-            selected={car.transmissionType == "automatic" ? true : false}
+            selected={car.transmissionType === "automatic" ? true : false}
           >
             Automatic
           </option>
           <option
             value="standard"
-            selected={car.transmissionType == "standard" ? true : false}
+            selected={car.transmissionType === "standard" ? true : false}
           >
             Standard
           </option>
@@ -77,10 +104,20 @@ export default function UpdateCar(props) {
         <label>Title:</label>
         <select name="title">
           <option value="">Select and Option</option>
-          <option value="clean">Clean</option>
-          <option value="salvage">Salvage</option>
+          <option value="clean" selected={car.title === "clean" ? true : false}>
+            Clean
+          </option>
+          <option
+            value="salvage"
+            selected={car.title === "salvage" ? true : false}
+          >
+            Salvage
+          </option>
         </select>
-        <button type="submit">Update Vehicle</button>
+        <div>
+          <button type="submit">Update Vehicle</button>
+          <button onClick={() => goBack()}>Cancel</button>
+        </div>
       </form>
     </div>
   );
