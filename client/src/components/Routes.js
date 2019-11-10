@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import CarCard from "./CarCard";
 import ParkCar from "./ParkCar";
 import CarList from "./CarList";
+import UpdateCar from "./UpdateCar";
 export default function Routes(props) {
   const { setCars, cars } = props;
   return (
@@ -27,6 +28,10 @@ export default function Routes(props) {
         render={props => <ParkCar {...props} setCars={setCars} />}
       />
       <Route path="/cars/:id" component={CarCard} />
+      <Route
+        path="/updatecar/:id"
+        render={props => <UpdateCar {...props} setCars={setCars} />}
+      />
     </div>
   );
 }

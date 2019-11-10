@@ -7,6 +7,7 @@ export default function ParkCar(props) {
     // console.log(e.target.Year.value);
     // console.log(e.target.make.value);
     // console.log(e.target.model.value);
+    // console.log(e.target.imgURL.value);
     const vehicle = {
       year: e.target.year.value,
       make: e.target.make.value,
@@ -15,7 +16,8 @@ export default function ParkCar(props) {
       model: e.target.model.value,
       transmissionType: e.target.transmissionType.value,
       title: e.target.title.value,
-      msrp: e.target.msrp.value
+      msrp: e.target.msrp.value,
+      imgURL:e.target.imgURL.value
     };
     // console.log(vehicle);
     axios
@@ -37,6 +39,7 @@ export default function ParkCar(props) {
         <input required type="number" name="vin" placeholder="VIN" />
         <input required type="number" name="mileage" placeholder="Mileage" />
         <input required type="number" name="msrp" placeholder="MSRP" />
+        <input type="text" name="imgURL" placeholder="Image Link" />
         <label>Transmission:</label>
         <select name="transmissionType">
           <option value="">Select and Option</option>

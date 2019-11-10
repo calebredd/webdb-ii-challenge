@@ -44,9 +44,10 @@ router.post("/cars", (req, res) => {
       transmissionType: newCar.transmissionType,
       title: newCar.title,
       MSRP: newCar.msrp,
-      Year: newCar.year
+      Year: newCar.year,
+      imgURL: newCar.imgURL
     })
-      .then(cars => {
+      .then(() => {
         res.status(200);
         Cars.find()
           .then(cars => {
@@ -65,11 +66,12 @@ router.put("/cars/:id", (req, res) => {
     // newCar.make &&
     // newCar.model &&
     // newCar.vin &&
-    newCar.mileage &&
-    newCar.transmissionType &&
-    newCar.title &&
-    newCar.msrp &&
-    newCar.year
+    newCar.mileage ||
+    newCar.transmissionType ||
+    newCar.title ||
+    newCar.msrp ||
+    newCar.year ||
+    newCar.imgURL
   ) {
     Cars.update(req.params.id, {
       // make: newCar.make,
@@ -79,7 +81,8 @@ router.put("/cars/:id", (req, res) => {
       transmissionType: newCar.transmissionType,
       title: newCar.title,
       MSRP: newCar.msrp,
-      Year: newCar.year
+      Year: newCar.year,
+      imgURL: newCar.imgURL
     })
       .then(cars => {
         res.status(201).json({ cars });

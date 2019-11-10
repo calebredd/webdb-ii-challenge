@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 export default function CarCard(props) {
   // console.log(props.match.params.id);
   const id = props.match.params.id;
@@ -8,7 +9,7 @@ export default function CarCard(props) {
     axios
       .get(`/api/cars/${id}`)
       .then(res => {
-        console.log(res.data.cars);
+        // console.log(res.data.cars);
         setCar(res.data.cars[0]);
       })
       .catch(err => console.error(err));
@@ -16,11 +17,14 @@ export default function CarCard(props) {
   const goBack = () => {
     props.history.goBack();
   };
-  console.log(car);
+  // console.log(car);
   return (
     <>
-      <p className="backButton" onClick={() => goBack()}>
-        <span>&#8592; Back to Cars</span>
+      <p className="backButton">
+        <span onClick={() => goBack()}>&#8592; Back to Cars</span>
+        <Link to={`/updatecar/${id}`}>
+          <span>Update Car Listing</span>
+        </Link>
       </p>
       <div className="carView">
         <div className="carCard">
@@ -28,7 +32,7 @@ export default function CarCard(props) {
             {" "}
             {car.Year} {car.make} {car.model}
           </p>
-
+          <img src={car.imgURL} alt={car.imgURL} />
           <p>Transmission: {car.transmissionType}</p>
           <p>Odometer: {car.mileage}</p>
           <p>Title: {car.title}</p>
